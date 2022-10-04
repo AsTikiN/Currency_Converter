@@ -17,7 +17,8 @@ const ChangeArea = ({ changeTo, changeToAmount }) => {
     (e) => {
       const changedRate = data.find(rate => rate.txt === e.target.value).rate;
       const secondaryRate = data.find(rate => rate.txt === changeInfo[secondaryFieldAmount.slice(0, secondaryFieldAmount.length - 6)]).rate;
-      const fieldValue = changeInfo[secondaryFieldAmount] / Math.min(secondaryRate, changedRate) * Math.max(secondaryRate, changedRate);
+      const fieldValue = secondaryRate > changedRate ? changeInfo[secondaryFieldAmount] / Math.max(secondaryRate, changedRate) * Math.min(secondaryRate, changedRate) 
+      : changeInfo[secondaryFieldAmount] / Math.min(secondaryRate, changedRate) * Math.max(secondaryRate, changedRate);
       setChangeInfo((prev) => ({...prev, [field]: e.target.value, [`${field}Amount`]: fieldValue }))
     }
 
